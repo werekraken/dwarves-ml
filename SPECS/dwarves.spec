@@ -2,7 +2,7 @@
 %define libver 1
 
 Name: dwarves
-Version: 1.17
+Version: 1.21
 Release: 1%{?dist}
 License: GPLv2
 Summary: Debugging Information Manipulation Tools (pahole & friends)
@@ -52,7 +52,7 @@ Debugging information processing library development files.
 %setup -q -n %{name}-%{version}
 
 %build
-%cmake .
+CFLAGS="-O2" %cmake .
 make VERBOSE=1 %{?_smp_mflags}
 
 %install
@@ -112,12 +112,15 @@ make install DESTDIR=%{buildroot}
 %{_includedir}/dwarves/libctf.h
 %{_includedir}/dwarves/list.h
 %{_includedir}/dwarves/rbtree.h
-%{_includedir}/dwarves/strings.h
+%{_includedir}/dwarves/pahole_strings.h
 %{_libdir}/%{libname}.so
 %{_libdir}/%{libname}_emit.so
 %{_libdir}/%{libname}_reorganize.so
 
 %changelog
+* Thu Jun 03 2021 Matthew Cover <matthew.cover@stackpath.com> - 1.21-1
+- Bump to v1.21.
+
 * Tue May 26 2020 Jiri Olsa <jolsa@redhat.com> - 1.17-1
 - moving to v1.17 version
 
